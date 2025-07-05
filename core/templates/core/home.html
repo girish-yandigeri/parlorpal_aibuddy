@@ -1,0 +1,438 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ParlorPal - AI Marketing for Beauty Salons{% endblock %}</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{% static 'core/style.css' %}" rel="stylesheet">
+    <script src="{% static 'core/script.js' %}"></script>
+
+
+    <style>
+        /* Home Page Specific Styles */
+.hero {
+    background-color: #F8F4FF;
+    background-image: radial-gradient(circle at 10% 20%, rgba(168, 139, 235, 0.1) 0%, rgba(108, 99, 255, 0.05) 90%);
+}
+
+.hero .emoji {
+    font-style: normal;
+}
+
+.btn-primary {
+    background-color: #A88BEB;
+    border-color: #A88BEB;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #8C6BEA;
+    border-color: #8C6BEA;
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: #A88BEB;
+    border-color: #A88BEB;
+}
+
+.btn-outline-primary:hover {
+    background-color: #A88BEB;
+    color: white;
+}
+
+.features .card {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+
+.features .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(168, 139, 235, 0.2) !important;
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(168, 139, 235, 0.1);
+    border-radius: 12px;
+}
+
+.how-it-works {
+    background-color: #F8F4FF;
+}
+
+.step-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    background-color: #A88BEB;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.quote-card {
+    position: relative;
+}
+
+.quote-card:before {
+    content: '"';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 5rem;
+    color: rgba(168, 139, 235, 0.1);
+    font-family: Georgia, serif;
+    line-height: 1;
+}
+
+.final-cta {
+    background-color: #6C63FF;
+    color: white;
+}
+
+.final-cta .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.final-cta .btn-outline-primary {
+    color: white;
+    border-color: white;
+}
+
+.final-cta .btn-outline-primary:hover {
+    background-color: white;
+    color: #6C63FF;
+}
+
+/* Animation Styles */
+[data-aos] {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+[data-aos="fade-up"] {
+    transform: translateY(30px);
+    opacity: 0;
+}
+
+[data-aos="fade-down"] {
+    transform: translateY(-30px);
+    opacity: 0;
+}
+
+[data-aos="fade-right"] {
+    transform: translateX(-30px);
+    opacity: 0;
+}
+
+[data-aos="fade-left"] {
+    transform: translateX(30px);
+    opacity: 0;
+}
+
+[data-aos].aos-animate {
+    transform: translate(0);
+    opacity: 1;
+}
+    </style>
+    </head>
+<body>
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero d-flex align-items-center min-vh-100">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6" data-aos="fade-right">
+        <h1 class="display-3 fw-bold mb-4">Welcome to ParlorPal <span class="emoji">💅</span></h1>
+        <p class="lead text-muted mb-5">Your AI Marketing Buddy for Small Businesses</p>
+        <div class="d-flex gap-3">
+          <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Login</a>
+          <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg px-4">Register</a>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left">
+        <img src="https://via.placeholder.com/600x400" alt="ParlorPal Dashboard Preview" class="img-fluid rounded shadow">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features py-5 bg-white" data-aos="fade-up">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Powerful Features</h2>
+      <p class="text-muted">Everything you need to grow your beauty business</p>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="icon-box mb-4">
+              <i class="bi bi-magic fs-1 text-primary"></i>
+            </div>
+            <h3 class="h5">AI Content Suggestions</h3>
+            <p class="text-muted">Get personalized marketing content tailored for your salon's unique style.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="icon-box mb-4">
+              <i class="bi bi-layout-wtf fs-1 text-primary"></i>
+            </div>
+            <h3 class="h5">Pre-designed Templates</h3>
+            <p class="text-muted">Beautiful, ready-to-use templates for social media and promotions.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="icon-box mb-4">
+              <i class="bi bi-speedometer2 fs-1 text-primary"></i>
+            </div>
+            <h3 class="h5">Smart Dashboard</h3>
+            <p class="text-muted">Track your marketing performance with intuitive analytics.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="icon-box mb-4">
+              <i class="bi bi-phone fs-1 text-primary"></i>
+            </div>
+            <h3 class="h5">Mobile-Friendly</h3>
+            <p class="text-muted">Manage your marketing on the go with our responsive design.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works py-5">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">How It Works</h2>
+      <p class="text-muted">Get started in just 3 simple steps</p>
+    </div>
+    
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="step-card text-center p-4">
+          <div class="step-number mb-3">1</div>
+          <h3 class="h4">Create Your Account</h3>
+          <p class="text-muted">Sign up in seconds and tell us about your business.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="step-card text-center p-4">
+          <div class="step-number mb-3">2</div>
+          <h3 class="h4">Connect Your Channels</h3>
+          <p class="text-muted">Link your social media accounts in one click.</p>
+        </div>
+      </div>
+      
+      <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="step-card text-center p-4">
+          <div class="step-number mb-3">3</div>
+          <h3 class="h4">Launch Campaigns</h3>
+          <p class="text-muted">Use our AI suggestions or create your own content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="why-us py-5 bg-white" data-aos="fade-up">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h2 class="fw-bold mb-4">Why Choose ParlorPal?</h2>
+        <ul class="list-unstyled">
+          <li class="mb-3 d-flex">
+            <i class="bi bi-check-circle-fill text-primary me-3"></i>
+            <span>AI-powered marketing tailored specifically for beauty businesses</span>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="bi bi-check-circle-fill text-primary me-3"></i>
+            <span>Save 10+ hours per week on content creation</span>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="bi bi-check-circle-fill text-primary me-3"></i>
+            <span>Proven to increase customer engagement by 3x</span>
+          </li>
+          <li class="mb-3 d-flex">
+            <i class="bi bi-check-circle-fill text-primary me-3"></i>
+            <span>No marketing experience required</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <div class="quote-card p-5 bg-light rounded">
+          <blockquote class="blockquote">
+            <p>"ParlorPal helped my salon increase bookings by 40% in just two months. The AI suggestions are incredibly accurate!"</p>
+            <footer class="blockquote-footer mt-3">Sarah K., Salon Owner</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="final-cta py-5 text-center" data-aos="fade-up">
+  <div class="container py-5">
+    <h2 class="fw-bold mb-4">Ready to Transform Your Marketing?</h2>
+    <p class="lead text-muted mb-5">Join hundreds of beauty professionals growing their business with ParlorPal</p>
+    <div class="d-flex gap-3 justify-content-center">
+      <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Login</a>
+      <a href="{% url 'register' %}" class="btn btn-outline-primary btn-lg px-4">Register</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer py-4 border-top">
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <div class="mb-3 mb-md-0">
+        <span class="text-muted">© 2023 ParlorPal. All rights reserved.</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a href="#" class="text-muted text-decoration-none">Contact</a>
+        <a href="{% url 'feedback' %}" class="text-muted text-decoration-none">Feedback</a>
+        <a href="#" class="text-muted text-decoration-none">Privacy</a>
+        <a href="#" class="text-muted text-decoration-none">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+    // Home Page Specific JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize AOS (Animate On Scroll)
+    function initAOS() {
+        const elements = document.querySelectorAll('[data-aos]');
+        
+        function checkPosition() {
+            const windowHeight = window.innerHeight;
+            const triggerBottom = windowHeight * 0.85;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < triggerBottom) {
+                    element.classList.add('aos-animate');
+                }
+            });
+        }
+        
+        // Run on load
+        checkPosition();
+        
+        // Run on scroll
+        window.addEventListener('scroll', function() {
+            checkPosition();
+        });
+        
+        // Run on resize
+        window.addEventListener('resize', function() {
+            checkPosition();
+        });
+    }
+    
+    // Smooth scrolling for anchor links
+    function initSmoothScrolling() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+    
+    // Button hover effects
+    function initButtonEffects() {
+        const buttons = document.querySelectorAll('.btn');
+        
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+    }
+    
+    // Initialize all functions
+    initAOS();
+    initSmoothScrolling();
+    initButtonEffects();
+    
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        
+        if (hero) {
+            hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+        }
+    });
+});
+</script>
+
+{% endblock %}
+</body>
+</html>

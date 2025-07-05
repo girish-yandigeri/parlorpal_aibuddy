@@ -1,0 +1,206 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+
+{% block title %}Dashboard - ParlorPal{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container">
+        <!-- Welcome Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="welcome-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h1 class="welcome-title">
+                                Welcome back, {{ user.username|default:"Beauty Professional" }}! 
+                                <i class="bi bi-heart-fill text-danger ms-2"></i>
+                            </h1>
+                            <p class="welcome-subtitle">
+                                Ready to create amazing marketing content for your salon?
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <div class="dashboard-stats">
+                                <div class="stat-item">
+                                    <i class="bi bi-calendar-check"></i>
+                                    <span>Today: {{ current_date|date:"M d, Y" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Profile Section -->
+        <div class="row mb-4">
+            <div class="col-lg-8">
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-building me-2"></i>Your Business Profile
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center mb-3">
+                                <div class="business-image">
+                                    
+                                    {% if profile.image %}
+                                        <img src="{{ business.image.url }}" alt="{{ business.name }}" class="img-fluid rounded">
+                                    {% else %}
+                                        <div class="business-placeholder">
+                                            <i class="bi bi-shop"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <h4 class="business-name">{{ profile.business_name|default:"Your Amazing Salon" }}</h4>
+                                <p class="business-description">
+                                    {{ profile.description|default:"A beautiful salon dedicated to making clients look and feel their best. We offer premium hair styling, nail care, and beauty treatments in a relaxing atmosphere." }}
+                                </p>
+                                <div class="business-meta">
+                                    <span class="badge bg-primary">
+                                        <i class="bi bi-clock me-1"></i>Member since {{ user.date_joined|date:"M Y" }}
+                                    </span>
+                                    <span class="badge bg-success ms-2">
+                                        <i class="bi bi-check-circle me-1"></i>Profile Active
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="quick-actions-card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-lightning me-2"></i>Quick Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'ai_suggestions' %}" class="quick-action-btn">
+                            <i class="bi bi-magic"></i>
+                            <span>Generate AI Content</span>
+                            <i class="bi bi-arrow-right ms-auto"></i>
+                        </a>
+                        <a href="#" class="quick-action-btn">
+                            <i class="bi bi-person-gear"></i>
+                            <span>Edit Profile</span>
+                            <i class="bi bi-arrow-right ms-auto"></i>
+                        </a>
+                        <a href="{% url 'feedback' %}" class="quick-action-btn">
+                            <i class="bi bi-chat-heart"></i>
+                            <span>Give Feedback</span>
+                            <i class="bi bi-arrow-right ms-auto"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Tools Section -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="tools-section">
+                    <h3 class="section-title">
+                        <i class="bi bi-tools me-2"></i>Marketing Tools
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class="bi bi-robot"></i>
+                                </div>
+                                <h5 class="tool-title">AI Content Generator</h5>
+                                <p class="tool-description">
+                                    Create engaging social media posts, promotional content, and marketing copy tailored to your salon.
+                                </p>
+                                <a href="{% url 'ai_suggestions' %}" class="btn btn-primary">
+                                    Get Started <i class="bi bi-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+                                <h5 class="tool-title">Campaign Planner</h5>
+                                <p class="tool-description">
+                                    Plan and schedule your marketing campaigns for maximum impact and customer engagement.
+                                </p>
+                                <a href="#" class="btn btn-outline-primary">
+                                    Coming Soon <i class="bi bi-clock ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <div class="tool-card">
+                                <div class="tool-icon">
+                                    <i class="bi bi-graph-up"></i>
+                                </div>
+                                <h5 class="tool-title">Analytics Dashboard</h5>
+                                <p class="tool-description">
+                                    Track your marketing performance and understand what resonates with your customers.
+                                </p>
+                                <a href="#" class="btn btn-outline-primary">
+                                    Coming Soon <i class="bi bi-clock ms-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row">
+            <div class="col-12">
+                <div class="activity-card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-clock-history me-2"></i>Recent Activity
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="bi bi-person-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h6>Account Created</h6>
+                                <p>Welcome to ParlorPal! Your account was successfully created.</p>
+                                <small class="text-muted">{{ user.date_joined|timesince }} ago</small>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <h6>Profile Verified</h6>
+                                <p>Your business profile has been verified and is now active.</p>
+                                <small class="text-muted">{{ user.date_joined|timesince }} ago</small>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-placeholder">
+                            <i class="bi bi-hourglass-split"></i>
+                            <p>Start using our AI tools to see more activity here!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

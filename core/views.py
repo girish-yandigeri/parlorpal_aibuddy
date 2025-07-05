@@ -13,6 +13,21 @@ from django.shortcuts import render, redirect
 from .models import CustomUser, BusinessProfile
 import os
 from dotenv import load_dotenv
+import os
+import cohere
+from dotenv import load_dotenv
+from PIL import Image, ImageDraw, ImageFont
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.http import HttpResponse
+import cohere
+import os
+from django.shortcuts import render, redirect
+from .models import CustomUser, BusinessProfile
+
+
+
+
 load_dotenv()
 cohere_client = cohere.Client(os.getenv("COHERE_API_KEY"))
 
@@ -232,3 +247,116 @@ def ai_suggestions_view(request):
 #         'profile': profile,
 #         'user': user
 #     })
+
+
+
+
+load_dotenv()
+cohere_client = cohere.Client(os.getenv("COHERE_API_KEY"))
+
+from PIL import Image, ImageDraw, ImageFont
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from .models import CustomUser, BusinessProfile
+import os, uuid
+from io import BytesIO
+from dotenv import load_dotenv
+import cohere
+
+load_dotenv()
+cohere_client = cohere.Client(os.getenv("COHERE_API_KEY"))
+
+def poster_generator_view(request):
+    if not request.session.get('user_id'):
+        return redirect('login')
+
+    user = CustomUser.objects.get(id=request.session['user_id'])
+    profile = BusinessProfile.objects.get(user=user)
+
+    poster_url = None
+    error_message = None
+
+    if request.method == 'POST':
+        user_input = request.POST.get("user_input", "")
+        language = request.POST.get("language", "en")
+        length = request.POST.get("length", "medium")
+        theme_color = request.POST.get("theme_color", "lightpink")
+        heading = request.POST.get("heading", "✨ Special Offer ✨")
+        # font_size = int(request.POST.get("font_size", 28))
+        # Map font size labels to pixel values
+        font_size_map = {
+            "small": 10,
+            "medium": 20,
+            "large": 30
+        }
+        font_size_label = request.POST.get("font_size", "medium")  # default to 'medium'
+        font_size = font_size_map.get(font_size_label.lower(), 20)  # fallback to 20px
+
+
+        logo = request.FILES.get('logo')
+        if not logo and profile.image:
+            logo = profile.image.path if os.path.exists(profile.image.path) else None
+
+        token_map = {"short": 80, "medium": 150, "long": 250}
+        max_tokens = token_map.get(length.lower(), 150)
+
+        language_instruction = "Translate this into Kannada." if language == "kn" else ""
+
+        prompt = f"""
+        Generate a {length} marketing message for a beauty parlour named '{profile.business_name}'.
+        This parlour offers: {profile.description}.
+        Focus on: {user_input}.
+        Make it friendly, catchy, suitable for Instagram, WhatsApp, and Facebook. Include emojis.
+        {language_instruction}
+        """
+
+        try:
+            response = cohere_client.generate(
+                model="command",
+                prompt=prompt,
+                max_tokens=max_tokens,
+                temperature=0.7
+            )
+            marketing_text = response.generations[0].text.strip()
+        except Exception as e:
+            error_message = f"❌ Error from Cohere: {str(e)}"
+            return render(request, 'core/generate_poster.html', {
+                'user': user,
+                'profile': profile,
+                'poster_url': None,
+                'error_message': error_message
+            })
+
+        # 🖼️ Poster
+        img = Image.new("RGB", (800, 1000), color=theme_color)
+        draw = ImageDraw.Draw(img)
+
+        try:
+            font_path = os.path.join("core", "static", "core", "Roboto-Bold.ttf")
+            font = ImageFont.truetype(font_path, font_size)
+        except:
+            font = ImageFont.load_default()
+
+        draw.text((40, 60), heading, fill="black", font=font)
+        draw.text((40, 150), profile.business_name, fill="black", font=font)
+        draw.text((40, 230), marketing_text, fill="black", font=font)
+
+        if logo:
+            try:
+                logo_img = Image.open(logo)
+                logo_img = logo_img.resize((150, 150))
+                img.paste(logo_img, (600, 60))
+            except:
+                pass  # skip if invalid logo
+
+        filename = f"poster_{uuid.uuid4().hex}.png"
+        poster_path = os.path.join('media', 'uploads', filename)
+        img.save(poster_path)
+        poster_url = f"/media/uploads/{filename}"
+
+    return render(request, 'core/generate_poster.html', {
+        'user': user,
+        'profile': profile,
+        'poster_url': poster_url,
+        'error_message': error_message
+    })

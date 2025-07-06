@@ -22,3 +22,6 @@ psycopg2-binary
 
 # Optional: If you plan to use dj-database-url for Render DB_URL parsing
 dj-database-url
+
+cloudinary
+python-dotenv

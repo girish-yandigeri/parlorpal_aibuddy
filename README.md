@@ -1,4 +1,4 @@
-# 💄 ParlorPal – Your AI Marketing Buddy for Small Businesses
+# 💅🏻 ParlorPal – Your AI Marketing Buddy for Small Businesses
 
 ParlorPal is a simple, beginner-friendly AI-powered web app built to help **beauty parlour owners** and **small service businesses** create eye-catching marketing content — effortlessly and instantly.
 

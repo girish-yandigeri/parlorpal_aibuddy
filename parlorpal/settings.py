@@ -37,6 +37,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['parlourpal.onrender.com', 'localhost', '127.0.0.1']
 
+
 # for media files
 
 MEDIA_URL = '/media/'
@@ -54,7 +55,7 @@ CLOUDINARY_STORAGE = {
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'core' / 'static']
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # for collectstatic
 
 
 # Application definition
@@ -80,7 +81,11 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware", #whitenoise
 ]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 
 ROOT_URLCONF = "parlorpal.urls"
 

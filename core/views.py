@@ -248,6 +248,10 @@ def poster_generator_view(request):
         'error_message': error_message
     })
 
+from django.http import HttpResponse
+
+def health_check(request):
+    return HttpResponse("OK")
 
 
 

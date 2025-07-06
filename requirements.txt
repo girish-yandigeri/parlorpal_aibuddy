@@ -25,3 +25,4 @@ dj-database-url
 
 cloudinary
 python-dotenv
+whitenoise

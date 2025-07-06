@@ -1,3 +1,5 @@
+<!-- DEBUG: is_authenticated = {{ user.is_authenticated }} -->
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +50,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{% url 'generate_poster' %}">
+                                <i class="bi bi-image me-1"></i>Generate Poster
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{% url 'feedback' %}">
                                 <i class="bi bi-chat-heart me-1"></i>Feedback
                             </a>
@@ -65,7 +73,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn btn-primary text-white px-3 ms-2" href="{% url 'register' %}">
-                                <i class="bi bi-person-plus me-1"></i>Get Started
+                                <i class="bi bi-person-plus me-1"></i>Register
                             </a>
                         </li>
                     {% endif %}

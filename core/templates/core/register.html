@@ -75,29 +75,38 @@
                                         <span class="input-group-text">
                                             <i class="bi bi-lock"></i>
                                         </span>
-                                        <input type="password"
+                                        <input type="password" 
+                                        class="form-control" 
+                                        id="password1" 
+                                        name="password1" 
+                                        placeholder="Create a strong password">
+                                        {% comment %} <input type="password"
                                                class="form-control"
                                                id="password"
                                                name="password"
                                                placeholder="Create a strong password"
-                                             >
+                                             > {% endcomment %}
                                         {{ user_form.password.errors }}
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    
+                                    <label for="confirm_password" class="form-label">Confirm Password</label>
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <i class="bi bi-lock-fill"></i>
                                         </span>
-                                        <label for="confirm_password" class="form-label">Confirm Password</label>
-                                        <input type="password"
+                                        <input type="password" 
+                                        class="form-control" 
+                                        id="password2" 
+                                        name="password2" 
+                                        placeholder="Confirm your password">
+                                        {% comment %} <input type="password"
                                                class="form-control"
                                                id="confirmPassword"
                                                name="confirm_password"
                                                placeholder="Confirm your password"
-                                               >
+                                               > {% endcomment %}
                                     </div>
                                 </div>
                             </div>

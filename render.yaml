@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: parlorpal
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn parlorpal.wsgi:application"
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: parlorpal.settings
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: COHERE_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false

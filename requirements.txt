@@ -1,0 +1,24 @@
+# Django framework and server
+Django>=5.1,<6.0
+gunicorn
+
+# Environment variable support
+python-dotenv
+
+# Cloudinary for image storage
+cloudinary
+
+# Cohere API (AI marketing text)
+cohere
+
+# OpenAI client (if you're using GPT)
+openai
+
+# Pillow for image and poster generation
+Pillow
+
+# Optional: If switching to PostgreSQL later on Render
+psycopg2-binary
+
+# Optional: If you plan to use dj-database-url for Render DB_URL parsing
+dj-database-url

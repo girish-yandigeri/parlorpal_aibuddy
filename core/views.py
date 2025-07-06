@@ -24,8 +24,7 @@ import cohere
 import os
 from django.shortcuts import render, redirect
 from .models import CustomUser, BusinessProfile
-
-
+import cloudinary.uploader
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -139,8 +138,17 @@ def feedback_view(request):
     return render(request, "core/feedback.html")
 
 @login_required
+
+
 def poster_generator_view(request):
-    profile = BusinessProfile.objects.get(user=request.user)
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    try:
+        profile = BusinessProfile.objects.get(user=request.user)
+    except BusinessProfile.DoesNotExist:
+        return redirect('dashboard')
+
     poster_url = None
     error_message = None
 
@@ -153,7 +161,9 @@ def poster_generator_view(request):
         font_size_map = {"small": 10, "medium": 20, "large": 30}
         font_size_label = request.POST.get("font_size", "medium")
         font_size = font_size_map.get(font_size_label.lower(), 20)
-        logo = request.FILES.get('logo') or (profile.image.path if profile.image and os.path.exists(profile.image.path) else None)
+
+        logo_file = request.FILES.get('logo')
+        logo_url = profile.image.url if not logo_file and profile.image else None
 
         token_map = {"short": 80, "medium": 150, "long": 250}
         max_tokens = token_map.get(length.lower(), 150)
@@ -184,6 +194,7 @@ def poster_generator_view(request):
                 'error_message': error_message
             })
 
+        # 🖼️ Generate the image
         img = Image.new("RGB", (800, 1000), color=theme_color)
         draw = ImageDraw.Draw(img)
 
@@ -197,18 +208,38 @@ def poster_generator_view(request):
         draw.text((40, 150), profile.business_name, fill="black", font=font)
         draw.text((40, 230), marketing_text, fill="black", font=font)
 
-        if logo:
-            try:
-                logo_img = Image.open(logo)
+        # 👩‍🎨 Add logo (from upload or profile)
+        try:
+            if logo_file:
+                logo_img = Image.open(logo_file)
+            elif logo_url:
+                from urllib.request import urlopen
+                logo_img = Image.open(urlopen(logo_url))
+            else:
+                logo_img = None
+
+            if logo_img:
                 logo_img = logo_img.resize((150, 150))
                 img.paste(logo_img, (600, 60))
-            except:
-                pass
+        except Exception as e:
+            print(f"Logo error: {e}")
 
-        filename = f"poster_{uuid.uuid4().hex}.png"
-        poster_path = os.path.join('media', 'uploads', filename)
-        img.save(poster_path)
-        poster_url = f"/media/uploads/{filename}"
+        # ☁️ Upload to Cloudinary
+        buffer = BytesIO()
+        img.save(buffer, format="PNG")
+        buffer.seek(0)
+
+        try:
+            upload_result = cloudinary.uploader.upload(
+                buffer,
+                folder="posters/",
+                public_id=f"poster_{uuid.uuid4().hex}",
+                overwrite=True,
+                resource_type="image"
+            )
+            poster_url = upload_result.get('secure_url')
+        except Exception as e:
+            error_message = f"❌ Cloudinary Upload Failed: {str(e)}"
 
     return render(request, 'core/generate_poster.html', {
         'user': request.user,
@@ -216,7 +247,6 @@ def poster_generator_view(request):
         'poster_url': poster_url,
         'error_message': error_message
     })
-
 
 
 

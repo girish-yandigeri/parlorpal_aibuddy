@@ -14,6 +14,4 @@ urlpatterns = [
     path('generate_poster/', views.poster_generator_view, name='generate_poster'),
     path('healthz/', views.health_check, name='health_check'),
 
-
-
 ]

@@ -1,9 +1,11 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib import admin  # ✅ CORRECT
-
 from .models import CustomUser, BusinessProfile
+from django.contrib.auth.admin import UserAdmin
 
-admin.site.register(CustomUser)
-admin.site.register(BusinessProfile)
+class BusinessProfileAdmin(admin.ModelAdmin):
+    list_display = ('business_name', 'user')
+    readonly_fields = ('user',)  # ✅ prevents changing user
+    # OR use exclude = ['user'] if you want to hide it instead
+
+admin.site.register(CustomUser, UserAdmin)
+admin.site.register(BusinessProfile, BusinessProfileAdmin)

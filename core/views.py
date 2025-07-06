@@ -170,8 +170,8 @@ def poster_generator_view(request):
         language_instruction = "Translate this into Kannada." if language == "kn" else ""
 
         prompt = f"""
-        Generate a {length} marketing message for a beauty parlour named '{profile.business_name}'.
-        This parlour offers: {profile.description}.
+        Generate a {length} marketing message for a business named '{profile.business_name}'.
+        This business offers: {profile.description}.
         Focus on: {user_input}.
         Make it friendly, catchy, suitable for Instagram, WhatsApp, and Facebook. Include emojis.
         {language_instruction}

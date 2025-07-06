@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     'cloudinary',
-    'cloudinary_storage',
+    # 'cloudinary_storage',
 ]
 AUTH_USER_MODEL = 'core.CustomUser'
 

@@ -35,7 +35,7 @@ SECRET_KEY = "django-insecure-_b4!n=j-kc!u^poka&@nc#uvc$&_k7b(qpnt$4(eq&c26nbr9(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['parlourpal.onrender.com', 'localhost', '127.0.0.1']
 
 # for media files
 

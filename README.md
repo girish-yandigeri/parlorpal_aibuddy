@@ -10,7 +10,7 @@ Built with love for the **Epsilon Hackathon 2025** by **Team HustlePioneers**, P
 
 ✅ Generate catchy marketing captions in **English or Kannada**  
 ✅ Auto-create posters using your **business name, offers & logo**  
-✅ Easy-to-use, **no templates or design skills** needed  
+✅ Easy-to-use, **no templates or design skil ls** needed  
 ✅ Ready for sharing on **Instagram, WhatsApp, Facebook**, etc.  
 
 ---

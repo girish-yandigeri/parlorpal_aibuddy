@@ -105,7 +105,7 @@ def ai_suggestions_view(request):
         language = request.POST.get("language", "english")
         length = request.POST.get("length", "small")
 
-        token_map = {"small": 60, "medium": 150, "long": 300}
+        token_map = {"small": 120, "medium": 250, "long": 500}
         max_tokens = token_map.get(length, 100)
 
         prompt = f"""

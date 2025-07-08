@@ -110,9 +110,9 @@ def ai_suggestions_view(request):
         
         
         prompt = f"""
-Task: Output only a social media caption for a beauty parlour.
+Task: Output only a funny and engaging social media caption for a business named {profile.business_name}.
 Language: {language}
-Character Limit: {length} 
+Character length must apply : {length} 
 
 Business Name: {profile.business_name}
 Services: {profile.description}
@@ -123,9 +123,8 @@ Instructions:
 - Output only the caption text. Do NOT include any explanation, intro, or extra commentary.
 - Use at least 4 attractive and relevant emojis related to beauty, sparkle, or care (like 💅 💖 💇‍♀️ ✨ 💎).
 - The output must be directly usable as a social media post caption.
-
-Only print the final caption. Nothing else.
 """
+
 
         
         

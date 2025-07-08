@@ -105,14 +105,14 @@ def ai_suggestions_view(request):
         language = request.POST.get("language", "english")
         length = request.POST.get("length", "small")
 
-        token_map = {"small": 120, "medium": 250, "long": 500}
+        token_map = {"small": 500, "medium": 1000, "long": 2000}
         max_tokens = token_map.get(length, 100)
         
         
         prompt = f"""
 Task: Output only a social media caption for a beauty parlour.
 Language: {language}
-Character Limit: {length}
+Character Limit: {length} 
 
 Business Name: {profile.business_name}
 Services: {profile.description}

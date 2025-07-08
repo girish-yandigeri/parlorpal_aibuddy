@@ -107,16 +107,38 @@ def ai_suggestions_view(request):
 
         token_map = {"small": 120, "medium": 250, "long": 500}
         max_tokens = token_map.get(length, 100)
-
+        
+        
         prompt = f"""
-        Generate a marketing message in {language} for a beauty parlour named '{profile.business_name}'.
-        This parlour offers: {profile.description}.
-        Focus on: {user_input}.
-        Make it friendly, catchy, and suitable for WhatsApp, Instagram, or Facebook.
-        Include emojis if appropriate. Limit to a {length} message.
-        """
+Task: Output only a social media caption for a beauty parlour.
+Language: {language}
+Character Limit: {length}
+
+Business Name: {profile.business_name}
+Services: {profile.description}
+Focus: {user_input}
+Platform: Instagram, WhatsApp, or Facebook
+
+Instructions:
+- Output only the caption text. Do NOT include any explanation, intro, or extra commentary.
+- Use at least 4 attractive and relevant emojis related to beauty, sparkle, or care (like 💅 💖 💇‍♀️ ✨ 💎).
+- The output must be directly usable as a social media post caption.
+
+Only print the final caption. Nothing else.
+"""
+
+        
+        
+        # prompt = f"""
+        # Generate a marketing message in {language} for a beauty parlour named '{profile.business_name}'.
+        # This parlour offers: {profile.description}.
+        # Focus on: {user_input}.
+        # Make it friendly, catchy, and suitable for WhatsApp, Instagram, or Facebook.
+        # Include emojis if appropriate. Limit to a {length} message.
+        # """
 
         try:
+            print(prompt)
             response = cohere_client.generate(
                 model="command",
                 prompt=prompt,

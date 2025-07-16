@@ -31,7 +31,7 @@ ParlorPal is an **AI-powered web app** designed to help **beauty parlour owners*
 
 ## 🚀 Live Demo
 
-🔗 Try it here: [https://parlourpal.onrender.com](https://parlourpal.onrender.com)  
+🔗 Try it here: [https://web-production-209f.up.railway.app/](https://web-production-209f.up.railway.app/)  
 📱 *Best viewed on mobile devices*
 
 🎥 [Watch Live Demo Video](https://drive.google.com/drive/folders/1oNkoA-bDattusrEVzLRwbasv8VjUAB0u?usp=sharing)

@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+{% block title %}Generate Video{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4">AI Video Generator</h2>
+    <div class="alert alert-warning mb-4">
+        <i class="bi bi-tools me-2"></i>
+        Video generation is still in development and temporarily disabled. Please check back soon!
+    </div>
+    <form method="post" class="mb-4" id="videoForm" onsubmit="return false;">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="campaign_name" class="form-label">Campaign Name</label>
+            <select class="form-select" id="campaign_name" name="campaign_name" disabled>
+                <option value="Summer Promo">Summer Promo</option>
+                <option value="Festive Offer">Festive Offer</option>
+                <option value="Bridal Special">Bridal Special</option>
+                <option value="New Launch">New Launch</option>
+                <option value="Other">Custom</option>
+            </select>
+            <input type="text" class="form-control mt-2" id="campaign_name_custom" name="campaign_name_custom" placeholder="Enter custom campaign name" style="display:none;" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="theme" class="form-label">Theme</label>
+            <select class="form-select" id="theme" name="theme" disabled>
+                <option value="Bridal">Bridal</option>
+                <option value="Festive">Festive</option>
+                <option value="Modern">Modern</option>
+                <option value="Classic">Classic</option>
+                <option value="Other">Custom</option>
+            </select>
+            <input type="text" class="form-control mt-2" id="theme_custom" name="theme_custom" placeholder="Enter custom theme" style="display:none;" disabled>
+        </div>
+        <div class="mb-3">
+            <label for="aspect_ratio" class="form-label">Aspect Ratio</label>
+            <select class="form-select" id="aspect_ratio" name="aspect_ratio" disabled>
+                <option value="16:9">16:9 (Landscape)</option>
+                <option value="9:16">9:16 (Portrait)</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="script" class="form-label">Script/Idea</label>
+            <textarea class="form-control" id="script" name="script" rows="3" placeholder="Describe your video idea or script..." required disabled></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" id="generateBtn" disabled>Generate Video</button>
+    </form>
+</div>
+{% endblock %} 

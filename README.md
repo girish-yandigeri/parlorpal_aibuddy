@@ -25,7 +25,7 @@ ParlorPal is an **AI-powered web app** designed to help **beauty parlour owners*
 | Image Gen     | Python (PIL), htmlcsstoimage |
 | Cloud Storage | Cloudinary                 |
 | Database      | SQLite (dev), Firebase (optional prod) |
-| Hosting       | Render                     |
+| Hosting       | Railway                     |
 
 ---
 

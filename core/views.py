@@ -772,8 +772,6 @@ def chatbot_view(request):
         full_prompt = "\n".join(prompt_parts)
 
         try:
-            from google import genai
-            from google.genai import types
             import os
             client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
             response = client.models.generate_content(
@@ -817,8 +815,6 @@ def email_subjects_view(request):
                 "Make them catchy, relevant, and suitable for a marketing campaign."
             )
             try:
-                from google import genai
-                from google.genai import types
                 import os
                 client = genai.Client(api_key=os.getenv('GEMINI_API_KEY'))
                 response = client.models.generate_content(
@@ -865,8 +861,7 @@ def generate_video_view(request):
         business_name = profile.business_name if profile and profile.business_name else ""
         description = profile.description if profile and profile.description else ""
         try:
-            from google import genai
-            from google.genai import types
+            import os
             client = genai.Client(api_key=api_key)
             prompt = (
                 f"Generate a marketing video using the following details.\n"

@@ -1,46 +1,14 @@
-# Django framework and server
 Django>=5.1,<6.0
 gunicorn
-
-# Environment variable support
 python-dotenv
-
-# Cloudinary for image storage
 cloudinary
-
-# AI APIs
 cohere
-
 vertexai
-
-# Image processing
 Pillow
-
-# Database support (for Railway PostgreSQL)
 psycopg2-binary
 dj-database-url
-
-# Static file serving
 whitenoise
-
-# HTTP requests and API dependencies
-requests
-httpx
-urllib3
-certifi
-
-# Google Cloud dependencies (for Vertex AI)
 google-cloud-aiplatform
 google-auth
 google-api-core
-
-# AI/ML dependencies
-pydantic
-tokenizers
-fastavro
-huggingface-hub
-
-# Additional utilities
-six
-packaging
 google-generativeai

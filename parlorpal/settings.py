@@ -17,7 +17,7 @@ import os
 import base64
 import dj_database_url
 
-
+from dotenv import load_dotenv
 load_dotenv()  # 🔐 Load the .env file
 
 # ...

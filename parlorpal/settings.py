@@ -14,7 +14,7 @@ from pathlib import Path
 # from decouple import config  # This import doesn't exist
 
 import os
-from dotenv import load_dotenv
+import base64
 import dj_database_url
 
 

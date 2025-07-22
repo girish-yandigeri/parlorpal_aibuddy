@@ -2,92 +2,152 @@
 
 ParlorPal is an **AI-powered web app** designed to help **beauty parlour owners** and **local service businesses** create attractive, personalized marketing content — instantly and effortlessly.
 
-✨ Built with love for the **Epsilon Hackathon 2025** by **Team HustlePioneers**, ParlorPal aims to empower small business owners who may not have the time, design experience, or marketing expertise to grow their business online.
+✨ Built with love for the **Epsilon Hackathon 2025** by **Team HustlePioneers**, ParlorPal empowers small business owners who may not have the time, design experience, or marketing expertise to grow their business online.
 
 ---
 
 ## 🌟 Features
 
-✔️ Generate catchy marketing text in **English or Kannada**  
-✔️ Auto-create posters using your **business name, offer details, brand color, and logo**  
-✔️ No design skills or templates needed — it's all automatic  
-✔️ Ready-to-share content for **Instagram, WhatsApp, Facebook**, and more  
-✔️ Clean, mobile-first UI designed for business owners on the go  
+### 🚀 Core User Flows
+- **Sign Up & Profile Creation:** Register and set up your business profile (name, logo, description, contact info, etc.).
+- **Personalized Dashboard:** Get AI-driven suggestions and quick access to all tools.
+- **AI Content Generation:**
+  - **Captions:** Generate catchy, emoji-rich marketing captions in English or Kannada (Cohere API).
+  - **Posters:** Instantly create visually appealing, brand-themed posters (VertexAI + PIL + Cloudinary).
+  - **Videos:** Generate short marketing videos for campaigns (Google Vertex AI Veo).
+  - **Email Subject Lines:** Get AI-generated subject lines for your campaigns (Google Gemini API).
+- **AI Chatbot:** Get instant help, marketing tips, and navigation guidance from a context-aware AI assistant (Gemini).
+- **Analytics & History:** Track your content generation, view insights, and revisit past creations.
+- **Feedback & Support:** Submit feedback and get support directly from the app.
+- **Email Verification & Festival Notifications:** Secure your account and get timely marketing reminders for festivals.
+
+### 🛠️ Advanced/Admin Features
+- **Admin Feedback Panel:** View and manage user feedback.
+- **Festival Management:** Manage festival notifications and email templates.
 
 ---
 
-## 🧠 Tech Stack
+## 🧠 Tech Stack & Integrations
 
 | Layer         | Technology Used           |
-|---------------|----------------------------|
-| Backend       | Django                     |
-| AI Text Gen   | Cohere API                 |
-| Image Gen     | Python (PIL), htmlcsstoimage |
-| Cloud Storage | Cloudinary                 |
+|---------------|--------------------------|
+| Backend       | Django (Python)           |
+| Frontend      | Django Templates, Bootstrap 5, Custom CSS/JS |
+| AI Text Gen   | Cohere API                |
+| AI Chatbot    | Google Gemini API         |
+| Image Gen     | VertexAI (Image), PIL, htmlcsstoimage |
+| Video Gen     | Google Vertex AI (Veo)    |
+| Cloud Storage | Cloudinary                |
 | Database      | SQLite (dev), Firebase (optional prod) |
-| Hosting       | Railway                     |
+| Hosting       | Railway                   |
+| Env Mgmt      | python-dotenv             |
+
+**Key Integrations:**
+- **Cohere:** For social media caption generation.
+- **Google Gemini:** For chatbot and email subject line generation.
+- **VertexAI:** For poster and video generation.
+- **Cloudinary:** For image/logo/poster storage and optimization.
 
 ---
 
-## 🚀 Live Demo
+## 🖥️ Project Structure
 
-🔗 Try it here: [https://web-production-209f.up.railway.app/](https://web-production-209f.up.railway.app/)  
-📱 *Best viewed on mobile devices*
-
-🎥 [Watch Live Demo Video](https://drive.google.com/drive/folders/1oNkoA-bDattusrEVzLRwbasv8VjUAB0u?usp=sharing)
-
----
-
-## 🛠️ How It Works
-
-1. Enter your **business details** (name, logo, description)
-2. Choose what you want to promote (e.g., Bridal Packages, Monsoon Discounts)
-3. Select your **language, text length, and theme color**
-4. ParlorPal generates:
-   - A **marketing caption**
-   - A **custom poster** using your brand identity
-5. Copy or download instantly — share anywhere 🎯
-
----
-
-## 📁 Project Structure
-
+```
 parlorpal/
-
 ├── core/
-
-│ ├── templates/
-
-│ ├── static/
-
-│ └── views.py, models.py, etc.
-
-├── media/uploads/
-
-├── parlorpal/ # Django settings
-
-├── db.sqlite3
-
-├── manage.py
-
-├── Procfile
-
-└── requirements.txt
-
+│   ├── templates/           # HTML templates (UI, emails, etc.)
+│   ├── static/              # CSS, JS, images
+│   ├── views.py             # Main business logic & user flows
+│   ├── models.py            # Database models (User, Profile, History, Feedback, etc.)
+│   ├── forms.py             # Django forms
+│   ├── cloudinary_utils.py  # Cloudinary integration
+│   ├── email_utils.py       # Email sending & templates
+│   └── ...
+├── parlorpal/               # Django settings & config
+├── media/                   # Uploaded files (dev)
+├── static/                  # Static assets (prod)
+├── manage.py                # Django entrypoint
+├── requirements.txt         # Python dependencies
+└── ...
+```
 
 ---
 
-## 🔐 Environment Setup (Private Keys Not Included)
+## ⚡ Quick Start (Local Development)
 
-This project uses the following environment variables:
+1. **Clone the repo:**
+   ```bash
+   git clone <your-repo-url>
+   cd parlorpal
+   ```
+2. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Set up environment variables:**
+   - Create a `.env` file in the root directory with the following keys:
+     - `COHERE_API_KEY` (Cohere text gen)
+     - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` (Cloudinary)
+     - `DJANGO_SECRET_KEY` (Django secret)
+     - `GEMINI_API_KEY` (Google Gemini)
+     - `GCP_PROJECT_ID` (Google Cloud project for VertexAI)
+     - `GOOGLE_VERTEX_API_KEY` (VertexAI video gen)
+4. **Run migrations:**
+   ```bash
+   python manage.py migrate
+   ```
+5. **Start the server:**
+   ```bash
+   python manage.py runserver
+   ```
+6. **Access the app:**
+   - Open [http://localhost:8000](http://localhost:8000) in your browser.
 
-- `COHERE_API_KEY`
-- `CLOUDINARY_CLOUD_NAME`
-- `CLOUDINARY_API_KEY`
-- `CLOUDINARY_API_SECRET`
-- `DJANGO_SECRET_KEY`
+---
 
-> These are **kept private** and not included in the repository for security reasons.
+## 🔑 Environment Variables
+
+| Variable                  | Purpose                        |
+|---------------------------|--------------------------------|
+| COHERE_API_KEY            | Cohere text generation         |
+| CLOUDINARY_CLOUD_NAME     | Cloudinary image storage       |
+| CLOUDINARY_API_KEY        | Cloudinary image storage       |
+| CLOUDINARY_API_SECRET     | Cloudinary image storage       |
+| DJANGO_SECRET_KEY         | Django security                |
+| GEMINI_API_KEY            | Google Gemini API (chatbot, email) |
+| GCP_PROJECT_ID            | Google Cloud project (VertexAI) |
+| GOOGLE_VERTEX_API_KEY     | VertexAI video generation      |
+
+> **Note:** These are **private** and not included in the repository.
+
+---
+
+## 📸 Screenshots & Demo
+
+- **Live Demo:** [https://web-production-209f.up.railway.app/](https://web-production-209f.up.railway.app/)  
+  *Best viewed on mobile devices*
+- **Demo Video:** [Watch Live Demo Video](https://drive.google.com/drive/folders/1oNkoA-bDattusrEVzLRwbasv8VjUAB0u?usp=sharing)
+- *(Add screenshots here if available)*
+
+---
+
+## 🤖 AI/ML Model Usage
+- **Cohere:** Used for generating creative, emoji-rich captions in multiple languages.
+- **Google Gemini:** Powers the chatbot and email subject line generator, providing context-aware, conversational responses.
+- **VertexAI (Image & Video):** Generates posters and marketing videos using business info and campaign details.
+- **PIL:** For image processing and poster composition.
+
+**Limitations:**
+- AI outputs may vary in quality; always review before publishing.
+- Some features (e.g., video generation) may require valid Google Cloud credentials and may incur costs.
+
+---
+
+## 📝 Contributing
+
+This project was built for the Epsilon Hackathon 2025 and is **not open for public contributions** at this time.
+
+If you have suggestions or want to collaborate, please contact **Team HustlePioneers**.
 
 ---
 

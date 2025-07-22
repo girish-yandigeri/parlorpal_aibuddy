@@ -10,7 +10,7 @@ cloudinary
 
 # AI APIs
 cohere
-openai
+
 vertexai
 
 # Image processing
@@ -43,3 +43,4 @@ huggingface-hub
 # Additional utilities
 six
 packaging
+google-generativeai
